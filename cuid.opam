@@ -15,14 +15,18 @@ build: [
     [ "jbuilder" "build" "-p" name "-j" jobs ]
 ]
 
-build-test: [ "jbuilder" "runtest" "--dev" "-p" name "-j" jobs ]
+build-test: [ make "report" ]
 install:    [ make "install" ]
 remove:     [ "ocamlfind" "remove" "cuid" ]
 
 depends: [
-    "alcotest"  {test}
-    "re"        {test}
-    "jbuilder"  {build}
-    "core"      {build}
-    "lwt"       {build}
+    "alcotest"   {test}
+    "re"         {test}
+    "jbuilder"   {build}
+    "core"       {build}
+    "lwt"        {build}
+    "bisect_ppx" {>= "1.3.0"}
+    "ocveralls"  {build}
+    "ocaml-migrate-parsetree"
+    "ppx_tools_versioned"
 ]

@@ -4,6 +4,7 @@ cuid
 CUID generator for OCaml.
 
 [![Build Status](https://travis-ci.org/marcoonroad/ocaml-cuid.svg?branch=master)](https://travis-ci.org/marcoonroad/ocaml-cuid)
+[![Coverage Status](https://coveralls.io/repos/github/marcoonroad/ocaml-cuid/badge.svg?branch=master)](https://coveralls.io/github/marcoonroad/ocaml-cuid?branch=master)
 
 For further information, please refer to http://usecuid.org
 
