@@ -1,6 +1,3 @@
-open Alcotest
-open Cuid
-
 module Str = Re.Str
 
 let __regexp = Str.regexp "^[a-f0-9]+$"
