@@ -1,0 +1,7 @@
+(jbuild_version 1)
+
+(executables
+    ((names (ocuidml))
+    (public_names (ocuidml))
+    (package cuid)
+    (libraries (core cuid lwt.unix))))
