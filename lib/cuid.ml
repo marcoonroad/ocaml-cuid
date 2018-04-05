@@ -28,7 +28,7 @@ let counter ( ) =
   |> hexadecimal
   |> padding4
 
-let fingerprint ( ) =
+let fingerprint =
   let number = ( )
   |> Unix.gethostname
   |> digest
@@ -46,7 +46,7 @@ let random ( ) =
 let generate ( ) =
   prefix ^
   (call timestamp) ^ (call counter) ^
-  (call fingerprint) ^
+  fingerprint ^
   (call random) ^ (call random)
 
 let _ =

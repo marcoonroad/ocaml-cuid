@@ -24,6 +24,5 @@ depends: [
     "re"        {test}
     "jbuilder"  {build}
     "core"      {build}
-    "cryptokit" {build}
     "lwt"       {build}
 ]

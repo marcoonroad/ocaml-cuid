@@ -1,9 +1,11 @@
 cuid
 ====
 
+CUID generator for OCaml.
+
 [![Build Status](https://travis-ci.org/marcoonroad/ocaml-cuid.svg?branch=master)](https://travis-ci.org/marcoonroad/ocaml-cuid)
 
-CUID generator for OCaml.
+For further information, please refer to http://usecuid.org
 
 ### Installation
 
@@ -35,3 +37,7 @@ As command-line tool:
 $ ocuidml
 c5ac5a0a100001b8597527a68
 ```
+
+### Conclusion
+
+PRs & issues are welcome. Have fun and imagine Sisyphus happy.
