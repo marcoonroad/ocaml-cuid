@@ -1,8 +1,8 @@
 module Str = Re.Str
 
-let __regexp = Str.regexp "^[a-f0-9]+$"
+let __regexp = Str.regexp "^[a-z0-9]+$"
 
-let is_hexadecimal text =
+let is_base36 text =
   Str.string_match __regexp text 0
 
 let does_collide ( ) =
