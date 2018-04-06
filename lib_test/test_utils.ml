@@ -7,7 +7,7 @@ let is_base36 text =
 
 let does_collide ( ) =
   let collision  = ref false in
-  let iterations = 20000000 in
+  let iterations = 1700000 in
   let cuids      = Hashtbl.create iterations in
   let rec loop index =
     if index > iterations then ( ) else (

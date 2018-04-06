@@ -8,31 +8,43 @@ let alphabet = [
   "n"; "o"; "p"; "q"; "r"; "s"; "t"; "u"; "v"; "w"; "x"; "y"; "z"
 ]
 
+let floor_to_int number =
+  number
+  |> Core.Float.round_down
+  |> int_of_float
+
 let rec loop result number =
-  if number <= 0 then result else
-    let index   = number mod 36 in
-    let number' = number / 36 in
-    let digit   = List.nth alphabet index in
+  if number <= 0. then result else
+    let index   = Core.Float.mod_float number 36. in
+    let number' = Core.Float.(number / 36.) in
+    let digit   = List.nth alphabet (floor_to_int index) in
     let result' = digit ^ result in
     loop result' number'
 
 let base36 number =
-  let number' = abs number in
-  if number' < 36 then
-    List.nth alphabet number'
+  let number' = Core.Float.abs number in
+  if Core.Float.(number' < 36.) then
+    List.nth alphabet (floor_to_int number')
   else
     loop "" number'
 
-let adjust8 text =
-    let length = String.length text in
-    try
-      let buffer = String.make (8 - length) '0' in
-      buffer ^ text
-    with _ -> Core.String.sub text ~pos:(length - 8) ~len:8
+let adjust fill text =
+  let length = String.length text in
+  let size   = max 0 (fill - length) in
+  let buffer = String.make size '0' in
+  buffer ^ text
 
-let call     lambda = lambda ( )
-let padding4 text   = Core.String.sub text ~pos:4 ~len:4
-let digest   text   = Digest.to_hex (Digest.string text)
+let padding fill count text =
+  let adjusted = adjust fill text in
+  let length   = Core.String.length adjusted in
+  let offset   = length - count in
+  Core.String.sub adjusted ~pos:offset ~len:count
+
+let padding4 = padding 8 4
+let padding8 = padding 8 8
+
+let call   lambda = lambda ( )
+let digest text   = Digest.to_hex (Digest.string text)
 
 let sum text =
   let number = text
@@ -43,18 +55,17 @@ let sum text =
 
 let timestamp ( ) =
   ( )
-  |> Unix.gettimeofday
-  |> int_of_float
+  |> Unix.time
   |> base36
-  |> adjust8
+  |> padding8
 
 let counter ( ) =
   state := (if !state < maximum then !state else 0);
   incr state;
   !state
   |> pred
+  |> float_of_int
   |> base36
-  |> adjust8
   |> padding4
 
 let fingerprint =
@@ -63,16 +74,22 @@ let fingerprint =
   |> digest
   |> sum
   in (number + Unix.getpid ( ))
+  |> float_of_int
   |> base36
-  |> adjust8
   |> padding4
 
 let random ( ) =
   maximum
   |> Core.Random.int
+  |> float_of_int
   |> base36
-  |> adjust8
   |> padding4
+
+let __fields ( ) =
+  (call timestamp),
+  (call counter),
+  fingerprint,
+  (call random ^ call random)
 
 let generate ( ) =
   prefix ^
