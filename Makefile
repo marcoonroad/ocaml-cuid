@@ -4,26 +4,10 @@ all: build
 
 # boot should install the opam tool as well
 
-update-vendor:
-		opam update             --yes
-		opam upgrade jbuilder   --yes
-		opam upgrade core       --yes
-		opam upgrade alcotest   --yes
-		opam upgrade odoc       --yes
-		opam upgrade odig       --yes
-		opam upgrade re         --yes
-		opam upgrade bisect_ppx --yes
-		opam upgrade ocveralls  --yes
-
-vendor:
-		opam install jbuilder   --yes
-		opam install core       --yes
-		opam install alcotest   --yes
-		opam install odoc       --yes
-		opam install odig       --yes
-		opam install re         --yes
-		opam install bisect_ppx --yes
-		opam install ocveralls  --yes
+vendor: pin
+		opam install cuid --deps-only --yes
+		opam install alcotest --yes
+		opam install re --yes
 
 build:
 		jbuilder build --dev
@@ -54,12 +38,17 @@ uninstall:
 		jbuilder uninstall
 
 .PHONY: coverage
-coverage: clean
+coverage: clean vendor
 	BISECT_ENABLE=YES jbuilder runtest --dev
 	bisect-ppx-report -I _build/default/ -text - `find . -name 'bisect*.out'`
 
 .PHONY: report
 report: coverage
 	ocveralls --prefix '_build/default' `find . -name 'bisect*.out'` --send
+
+pin:
+	opam pin add cuid . -n --yes
+
+
 
 # END
