@@ -3,3 +3,4 @@ _build/
 *.install
 jbuild-workspace
 _coverage/
+bisect*.out

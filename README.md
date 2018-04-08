@@ -29,14 +29,7 @@ As library:
 
 ```ocaml
 let cuid = Cuid.generate ( )
-(* cuid is "c5ac5a1090000297bd8e9678a", for example *)
-```
-
-As command-line tool:
-
-```shell
-$ ocuidml
-c5ac5a0a100001b8597527a68
+(* cuid is "c00p6veue0000072slgr067a3", for example *)
 ```
 
 ### Conclusion
