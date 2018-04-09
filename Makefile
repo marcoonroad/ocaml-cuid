@@ -4,38 +4,44 @@ all: build
 
 # boot should install the opam tool as well
 
+pin:
+	opam pin add cuid . -n --yes
+
+
 vendor: pin
-		opam install cuid --deps-only --yes
-		opam install alcotest --yes
-		opam install re --yes
+	opam install cuid --deps-only --yes
+	opam install alcotest --yes
+	opam install re --yes
+	opam install bisect_ppx --yes
+	opam install ocveralls --yes
 
 build:
-		jbuilder build --dev
+	jbuilder build --dev
 
 test: build
-		jbuilder runtest --dev
+	jbuilder runtest --dev
 
 doc: build
-		jbuilder build @doc
+	jbuilder build @doc
 
 cleanup:
-		rm -fv *~
-		rm -fv lib/*~
-		rm -fv lib_test/*~
-		rm -fv .*.un~
-		rm -fv lib/.*.un~
-		rm -fv lib_test/.*.un~
-		rm -f `find . -name 'bisect*.out'`
+	rm -fv *~
+	rm -fv lib/*~
+	rm -fv lib_test/*~
+	rm -fv .*.un~
+	rm -fv lib/.*.un~
+	rm -fv lib_test/.*.un~
+	rm -f `find . -name 'bisect*.out'`
 
 .PHONY: clean
 clean: cleanup
-		jbuilder clean
+	jbuilder clean
 
 install: build
-		jbuilder install
+	jbuilder install
 
 uninstall:
-		jbuilder uninstall
+	jbuilder uninstall
 
 .PHONY: coverage
 coverage: clean vendor
@@ -45,10 +51,5 @@ coverage: clean vendor
 .PHONY: report
 report: coverage
 	ocveralls --prefix '_build/default' `find . -name 'bisect*.out'` --send
-
-pin:
-	opam pin add cuid . -n --yes
-
-
 
 # END
