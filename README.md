@@ -3,8 +3,22 @@ cuid
 
 CUID generator for OCaml.
 
-[![Build Status](https://travis-ci.org/marcoonroad/ocaml-cuid.svg?branch=master)](https://travis-ci.org/marcoonroad/ocaml-cuid)
-[![Coverage Status](https://coveralls.io/repos/github/marcoonroad/ocaml-cuid/badge.svg?branch=master)](https://coveralls.io/github/marcoonroad/ocaml-cuid?branch=master)
+
+<center>
+
+[![Travis](https://img.shields.io/travis/marcoonroad/ocaml-cuid.svg?style=flat-square)](https://travis-ci.org/marcoonroad/ocaml-cuid)
+<span> </span>
+[![Coveralls github](https://img.shields.io/coveralls/github/marcoonroad/ocaml-cuid.svg?style=flat-square)](https://coveralls.io/github/marcoonroad/ocaml-cuid?branch=master)
+<span> </span>
+![GitHub tag](https://img.shields.io/github/tag/marcoonroad/ocaml-cuid.svg?style=flat-square)
+<span> </span>
+[![Github all releases](https://img.shields.io/github/downloads/marcoonroad/ocaml-cuid/total.svg?style=flat-square)](https://github.com/marcoonroad/ocaml-cuid/releases/)
+<span> </span>
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+</center>
+
+<p/>
 
 For further information, please refer to http://usecuid.org
 
