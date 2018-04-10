@@ -10,6 +10,7 @@ pin:
 
 vendor: pin
 	opam install cuid --deps-only --yes
+	opam install core --yes
 	opam install alcotest --yes
 	opam install re --yes
 	opam install bisect_ppx --yes
