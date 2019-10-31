@@ -46,6 +46,16 @@ let cuid = Cuid.generate ( )
 (* cuid is "c00p6veue0000072slgr067a3", for example *)
 ```
 
+There's also an implementation of CUID slugs. They fit in cases
+where collision resistance is not important and when they are not
+generated too frequently. For instance, we can use them as URL
+suffixes for blog posts. To generate a CUID slug, just use:
+
+```ocaml
+let slug = Cuid.slug ( )
+(* slug is "u90m0y0m", for example *)
+```
+
 ### Conclusion
 
 PRs & issues are welcome. Have fun and imagine Sisyphus happy.
