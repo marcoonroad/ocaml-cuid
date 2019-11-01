@@ -31,10 +31,10 @@ $ opam install cuid
 ```
 
 Otherwise, this library is also installable using
-JBuilder within this root directory:
+Dune within this root directory:
 
 ```shell
-$ jbuilder install
+$ dune install
 ```
 
 ### Usage
