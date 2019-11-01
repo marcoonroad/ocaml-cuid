@@ -17,13 +17,16 @@ vendor: pin
 	opam install ocveralls --yes
 
 build:
-	jbuilder build --dev
+	dune build
 
-test: build
-	jbuilder runtest --dev
+test: clean build
+	dune runtest
+
+quick-test: clean build
+	ALCOTEST_QUICK_TESTS=1 dune runtest
 
 doc: build
-	jbuilder build @doc
+	dune build @doc
 
 cleanup:
 	rm -fv *~
@@ -36,17 +39,17 @@ cleanup:
 
 .PHONY: clean
 clean: cleanup
-	jbuilder clean
+	dune clean
 
 install: build
-	jbuilder install
+	dune install
 
 uninstall:
-	jbuilder uninstall
+	dune uninstall
 
 .PHONY: coverage
 coverage: clean vendor
-	BISECT_ENABLE=YES jbuilder runtest --dev
+	BISECT_ENABLE=YES dune runtest
 	bisect-ppx-report -I _build/default/ -text - `find . -name 'bisect*.out'`
 
 .PHONY: report
