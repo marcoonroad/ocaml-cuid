@@ -78,9 +78,12 @@ let fingerprint =
   |> base36
   |> padding4
 
+let __generate_random max_value =
+  Nocrypto.Rng.Int.gen max_value
+
 let random ( ) =
   maximum
-  |> Core.Random.int
+  |> __generate_random
   |> float_of_int
   |> base36
   |> padding4
@@ -97,5 +100,22 @@ let generate ( ) =
   fingerprint ^
   (call random) ^ (call random)
 
+let fingerprint_slug =
+  let length = Core.String.length fingerprint in
+  Core.String.sub ~pos:0 ~len:1 fingerprint ^
+  Core.String.sub ~pos:(length - 1) ~len:1 fingerprint
+
+let slug ( ) =
+  let timestamp' = call timestamp in
+  let counter' = call counter in
+  let random' = call random in
+  let timestamp'_length = Core.String.length timestamp' in
+  let counter'_length = Core.String.length counter' in
+  let random'_length = Core.String.length random' in
+  Core.String.sub ~pos:(timestamp'_length - 2) ~len:2 timestamp' ^
+  Core.String.sub ~pos:(counter'_length - 2) ~len:2 counter' ^
+  fingerprint_slug ^
+  Core.String.sub ~pos:(random'_length - 2) ~len:2 counter'
+
 let _ =
-  Core.Random.self_init ( )
+  Nocrypto_entropy_unix.initialize ( )

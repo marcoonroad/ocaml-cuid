@@ -1,6 +1,6 @@
-opam-version: "1.2"
+opam-version: "2.0"
 name:         "cuid"
-version:      "0.1"
+version:      "0.2"
 maintainer:   "Marco Aurélio da Silva <marcoonroad@gmail.com>"
 authors:      "Marco Aurélio da Silva <marcoonroad@gmail.com>"
 bug-reports:  "https://github.com/marcoonroad/ocaml-cuid/issues"
@@ -8,19 +8,21 @@ license:      "MIT"
 homepage:     "https://github.com/marcoonroad/ocaml-cuid"
 dev-repo:     "git://github.com/marcoonroad/ocaml-cuid.git"
 
-available: [ ocaml-version >= "4.03.0" ]
+synopsis:     "CUID generator for OCaml"
 
 build: [
-    [ "jbuilder" "subst" ] {pinned}
-    [ "jbuilder" "build" "-p" name "-j" jobs ]
+    [ "dune" "subst" ] {pinned}
+    [ "dune" "build" "-p" name "-j" jobs ]
 ]
 
-build-test: [ "jbuilder" "runtest" "-p" name "-j" jobs]
+run-test: [ "dune" "runtest" "-p" name "-j" jobs]
 
 depends: [
-    "alcotest" {test}
-    "re"       {test}
-    "jbuilder" {build}
+    "ocaml"    {>= "4.03.0"}
+    "alcotest" {with-test}
+    "re"       {with-test}
+    "dune"     {>= "1.0"}
     "core"
+    "nocrypto"
     "bisect_ppx"
 ]
