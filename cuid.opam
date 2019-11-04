@@ -17,10 +17,10 @@ build: [
 run-test: [ "dune" "runtest" "-p" name "-j" jobs]
 
 depends: [
-    "ocaml" {>= "4.03.0"}
+    "ocaml"    {>= "4.03.0"}
     "alcotest" {with-test}
     "re"       {with-test}
-    "dune" {build & >= "1.0"}
+    "dune"     {>= "1.0"}
     "core"
     "nocrypto"
     "bisect_ppx"
