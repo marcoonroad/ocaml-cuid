@@ -10,20 +10,20 @@ let alphabet = [
 
 let floor_to_int number =
   number
-  |> Core.Float.round_down
+  |> Base.Float.round_down
   |> int_of_float
 
 let rec loop result number =
   if number <= 0. then result else
-    let index   = Core.Float.mod_float number 36. in
-    let number' = Core.Float.(number / 36.) in
+    let index   = Base.Float.mod_float number 36. in
+    let number' = Base.Float.(number / 36.) in
     let digit   = List.nth alphabet (floor_to_int index) in
     let result' = digit ^ result in
     loop result' number'
 
 let base36 number =
-  let number' = Core.Float.abs number in
-  if Core.Float.(number' < 36.) then
+  let number' = Base.Float.abs number in
+  if Base.Float.(number' < 36.) then
     List.nth alphabet (floor_to_int number')
   else
     loop "" number'
@@ -36,9 +36,9 @@ let adjust fill text =
 
 let padding fill count text =
   let adjusted = adjust fill text in
-  let length   = Core.String.length adjusted in
+  let length   = Base.String.length adjusted in
   let offset   = length - count in
-  Core.String.sub adjusted ~pos:offset ~len:count
+  Base.String.sub adjusted ~pos:offset ~len:count
 
 let padding4 = padding 8 4
 let padding8 = padding 8 8
@@ -48,9 +48,9 @@ let digest text   = Digest.to_hex (Digest.string text)
 
 let sum text =
   let number = text
-  |> Core.String.to_list
-  |> (Core.List.map ~f:int_of_char)
-  |> (Core.List.fold_left ~init:0 ~f:(+))
+  |> Base.String.to_list
+  |> (Base.List.map ~f:int_of_char)
+  |> (Base.List.fold_left ~init:0 ~f:(+))
   in number / (String.length text + 1)
 
 let timestamp ( ) =
@@ -101,21 +101,21 @@ let generate ( ) =
   (call random) ^ (call random)
 
 let fingerprint_slug =
-  let length = Core.String.length fingerprint in
-  Core.String.sub ~pos:0 ~len:1 fingerprint ^
-  Core.String.sub ~pos:(length - 1) ~len:1 fingerprint
+  let length = Base.String.length fingerprint in
+  Base.String.sub ~pos:0 ~len:1 fingerprint ^
+  Base.String.sub ~pos:(length - 1) ~len:1 fingerprint
 
 let slug ( ) =
   let timestamp' = call timestamp in
   let counter' = call counter in
   let random' = call random in
-  let timestamp'_length = Core.String.length timestamp' in
-  let counter'_length = Core.String.length counter' in
-  let random'_length = Core.String.length random' in
-  Core.String.sub ~pos:(timestamp'_length - 2) ~len:2 timestamp' ^
-  Core.String.sub ~pos:(counter'_length - 2) ~len:2 counter' ^
+  let timestamp'_length = Base.String.length timestamp' in
+  let counter'_length = Base.String.length counter' in
+  let random'_length = Base.String.length random' in
+  Base.String.sub ~pos:(timestamp'_length - 2) ~len:2 timestamp' ^
+  Base.String.sub ~pos:(counter'_length - 2) ~len:2 counter' ^
   fingerprint_slug ^
-  Core.String.sub ~pos:(random'_length - 2) ~len:2 counter'
+  Base.String.sub ~pos:(random'_length - 2) ~len:2 counter'
 
 let _ =
   Nocrypto_entropy_unix.initialize ( )

@@ -1,9 +1,9 @@
 (library
  (name test_utils)
  (modules test_utils)
- (libraries alcotest re cuid core))
+ (libraries alcotest re cuid base))
 
 (executables
  (names cuids)
  (modules cuids)
- (libraries alcotest cuid core test_utils))
+ (libraries alcotest cuid base test_utils))

@@ -17,11 +17,11 @@ build: [
 run-test: [ "dune" "runtest" "-p" name "-j" jobs]
 
 depends: [
-    "ocaml"    {>= "4.03.0"}
-    "alcotest" {with-test}
-    "re"       {with-test}
-    "dune"     {>= "1.0"}
-    "core"
-    "nocrypto"
-    "bisect_ppx"
+    "ocaml"       {>= "4.03.0"}
+    "alcotest"    {with-test & >= "0.8.4"}
+    "re"          {with-test & >= "1.8.0"}
+    "dune"        {build & >= "1.6.2"}
+    "base"        {>= "v0.9.3"}
+    "nocrypto"    {>= "0.5.4-1"}
+    "bisect_ppx"  {>= "1.4.0"}
 ]

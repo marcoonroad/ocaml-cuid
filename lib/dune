@@ -5,4 +5,4 @@
  (wrapped false)
  (preprocess
   (pps bisect_ppx -- -conditional))
- (libraries core unix nocrypto nocrypto.unix))
+ (libraries base unix nocrypto nocrypto.unix))
