@@ -12,9 +12,8 @@ synopsis:     "CUID generator for OCaml"
 build: [
     [ "dune" "subst" ] {pinned}
     [ "dune" "build" "-p" name "-j" jobs ]
+    [ "dune" "runtest" "-p" name "-j" jobs ] {with-test}
 ]
-
-run-test: [ "dune" "runtest" "-p" name "-j" jobs]
 
 depends: [
     "ocaml"       {>= "4.03.0"}
