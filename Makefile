@@ -14,7 +14,7 @@ unpin:
 
 .PHONY: vendor
 vendor:
-	@ opam install . --deps-only --with-test --yes
+	@ opam install . --deps-only --yes
 
 build:
 	@ dune build

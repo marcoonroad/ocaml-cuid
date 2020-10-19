@@ -12,13 +12,14 @@ synopsis:     "CUID generator for OCaml"
 build: [
     [ "dune" "subst" ] {pinned}
     [ "dune" "build" "-p" name "-j" jobs ]
-    [ "dune" "runtest" "-p" name "-j" jobs ] {with-test}
 ]
+
+run-test: [ "dune" "runtest" "-p" name "-j" jobs ]
 
 depends: [
     "ocaml"       {>= "4.03.0"}
-    "alcotest"    {build & with-test & >= "0.8.4"}
-    "re"          {build & with-test & >= "1.8.0"}
+    "alcotest"    {>= "0.8.4"}
+    "re"          {>= "1.8.0"}
     "dune"        {build & >= "1.6.2"}
     "base"        {>= "v0.9.3"}
     "nocrypto"    {>= "0.5.4-1"}
