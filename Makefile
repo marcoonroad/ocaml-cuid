@@ -16,6 +16,9 @@ unpin:
 vendor:
 	@ opam install . --deps-only --yes
 
+.PHONY: vendor-with-test
+	@ opam install . --deps-only --with-test --yes
+
 build:
 	@ dune build
 
@@ -49,7 +52,7 @@ uninstall:
 	@ dune uninstall
 
 .PHONY: coverage
-coverage: clean vendor
+coverage: clean vendor vendor-with-test
 	@ BISECT_ENABLE=YES dune runtest
 	@ bisect-ppx-report -I _build/default/ -text - `find . -name 'bisect*.out'`
 
