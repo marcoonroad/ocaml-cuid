@@ -2,6 +2,6 @@
  (name runtest)
  (package cuid)
  (deps
-  (:< lib_test/cuids.exe))
+  (:< test/cuids.exe))
  (action
   (run %{<})))

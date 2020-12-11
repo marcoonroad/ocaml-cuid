@@ -1,24 +1,24 @@
-cuid
-====
+# cuid
 
 CUID generator for OCaml.
 
-
-<center>
-
-[![Travis](https://img.shields.io/travis/marcoonroad/ocaml-cuid.svg?style=flat-square)](https://travis-ci.org/marcoonroad/ocaml-cuid)
-<span> </span>
-[![Coveralls github](https://img.shields.io/coveralls/github/marcoonroad/ocaml-cuid.svg?style=flat-square)](https://coveralls.io/github/marcoonroad/ocaml-cuid?branch=master)
-<span> </span>
-![GitHub tag](https://img.shields.io/github/tag/marcoonroad/ocaml-cuid.svg?style=flat-square)
-<span> </span>
-[![Github all releases](https://img.shields.io/github/downloads/marcoonroad/ocaml-cuid/total.svg?style=flat-square)](https://github.com/marcoonroad/ocaml-cuid/releases/)
-<span> </span>
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-
-</center>
-
-<p/>
+<p>
+<a target="_blank" class="badge-link" href="https://github.com/marcoonroad/ocaml-cuid/blob/stable/cuid.opam">
+<img src="https://img.shields.io/static/v1?label=OCaml&message=%2Bv4.07.0&color=orange&style=flat-square&logo=ocaml" />
+</a><span class="badge-separator"></span>
+<a target="_blank" class="badge-link" href="https://github.com/marcoonroad/ocaml-cuid/actions?query=workflow%3A%22Ubuntu+CI+Workflow%22+branch%3Astable">
+<img alt="Ubuntu Workflow Status" src="https://img.shields.io/github/workflow/status/marcoonroad/ocaml-cuid/Ubuntu%20CI%20Workflow/stable?label=Ubuntu&logo=github&style=flat-square" />
+</a><span class="badge-separator"></span>
+<a target="_blank" class="badge-link" href="https://github.com/marcoonroad/ocaml-cuid/actions?query=workflow%3A%22Windows+CI+Workflow%22+branch%3Astable">
+<img alt="Windows Workflow Status" src="https://img.shields.io/github/workflow/status/marcoonroad/ocaml-cuid/Windows%20CI%20Workflow/stable?label=Windows&logo=github&style=flat-square" />
+</a><span class="badge-separator"></span>
+<a target="_blank" class="badge-link" href="https://github.com/marcoonroad/ocaml-cuid/actions?query=workflow%3A%22MacOS+CI+Workflow%22+branch%3Astable">
+<img alt="MacOS Workflow Status" src="https://img.shields.io/github/workflow/status/marcoonroad/ocaml-cuid/MacOS%20CI%20Workflow/stable?label=MacOS&logo=github&style=flat-square" />
+</a><span class="badge-separator"></span>
+<a target="_blank" class="badge-link" href="https://github.com/marcoonroad/ocaml-cuid/blob/stable/LICENSE">
+<img alt="Project License" src="https://img.shields.io/github/license/marcoonroad/ocaml-cuid?label=License&logo=github&style=flat-square" />
+</a>
+</p>
 
 For further information, please refer to http://usecuid.org
 
