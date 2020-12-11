@@ -16,6 +16,10 @@ unpin:
 vendor:
 	@ opam install . --deps-only --yes
 
+.PHONY: utop
+utop:
+	@ dune utop lib
+
 build:
 	@ dune build
 

@@ -78,12 +78,27 @@ let fingerprint =
   |> base36
   |> padding4
 
-let __generate_random max_value =
-  Nocrypto.Rng.Int.gen max_value
+let __sum_then_mod ~basis blob =
+  let length = Cstruct.len blob in
+  let rec loop index sum =
+    if index = length then sum else
+    loop (index + 1) (sum + Cstruct.get_uint8 blob index)
+  in
+  loop 0 0 mod basis
+
+(* generates a number lower than 36^4, never zero for entropy reasons *)
+let __generate_random () =
+  (* 2304 is the common multiple for both 256 (byte) & 36 (base), ensures fair randomness *)
+  let blob = Mirage_crypto_rng.generate 36 in
+  let fst = Cstruct.sub blob  0 9 |> __sum_then_mod ~basis:36 in
+  let snd = Cstruct.sub blob  9 9 |> __sum_then_mod ~basis:36 in
+  let trd = Cstruct.sub blob 18 9 |> __sum_then_mod ~basis:36 in
+  let fth = Cstruct.sub blob 27 9 |> __sum_then_mod ~basis:36 in
+  let res = ((fst + 1) * (snd + 1) * (trd + 1) * (fth + 1)) - 1 in
+  max 1 res
 
 let random ( ) =
-  maximum
-  |> __generate_random
+  __generate_random ()
   |> float_of_int
   |> base36
   |> padding4
@@ -118,4 +133,4 @@ let slug ( ) =
   Base.String.sub ~pos:(random'_length - 2) ~len:2 counter'
 
 let _ =
-  Nocrypto_entropy_unix.initialize ( )
+  Mirage_crypto_rng_unix.initialize ( )

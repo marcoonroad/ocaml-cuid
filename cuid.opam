@@ -1,6 +1,6 @@
 opam-version: "2.0"
 name:         "cuid"
-version:      "0.2"
+version:      "1.0"
 maintainer:   "Marco Aurélio da Silva <marcoonroad@gmail.com>"
 authors:      "Marco Aurélio da Silva <marcoonroad@gmail.com>"
 bug-reports:  "https://github.com/marcoonroad/ocaml-cuid/issues"
@@ -17,11 +17,12 @@ build: [
 run-test: [ "dune" "runtest" "-p" name "-j" jobs ]
 
 depends: [
-    "ocaml"       {>= "4.03.0"}
-    "alcotest"    {>= "0.8.4"}
-    "re"          {>= "1.8.0"}
-    "dune"        {build & >= "1.6.2"}
-    "base"        {>= "v0.9.3"}
-    "nocrypto"    {>= "0.5.4-1"}
-    "bisect_ppx"  {>= "1.4.0"}
+    "ocaml" {>= "4.07.0"}
+    "alcotest" {>= "0.8.4"}
+    "re" {>= "1.8.0"}
+    "dune" {build & >= "1.6.2"}
+    "base" {>= "v0.9.3"}
+    "mirage-crypto" {>= "0.6.1"}
+    "mirage-crypto-rng" {>= "0.6.1"}
+    "bisect_ppx" {>= "1.4.0"}
 ]
