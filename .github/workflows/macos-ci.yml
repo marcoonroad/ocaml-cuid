@@ -3,11 +3,11 @@ name: MacOS CI Workflow
 on:
   push:
     branches:
-      - master
+      - stable
       - development
   pull_request:
     branches:
-      - master
+      - stable
       - development
 
   workflow_dispatch:
