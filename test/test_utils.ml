@@ -6,24 +6,17 @@ let is_base36 text =
   Str.string_match __regexp text 0
 
 let does_collide_with iterations generator ( ) =
-  let collision  = ref false in
-  let cuids      = Hashtbl.create iterations in
-  let rec loop index =
-    if index > iterations then ( ) else (
+  let rec loop previous index =
+    if index > iterations then false else
       let cuid = generator ( ) in
-      if Hashtbl.mem cuids cuid then
-        collision := true
+      if cuid > previous then
+        loop cuid (index + 1)
       else
-        (Hashtbl.add cuids cuid true;
-        loop (index + 1))
-    )
+        true
   in
-  loop 1;
-  !collision
+  loop (generator ( )) 1
 
-(* FIXME: attempt to test on Windows, stateless seems to break in this OS *)
-let loops =
-  if Sys.os_type = "Unix" then 1700000 else 170000
+let loops = 1700000
 
 let does_collide ~stateless = does_collide_with loops @@ Cuid.generate ~stateless
 

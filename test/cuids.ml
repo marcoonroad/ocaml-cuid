@@ -39,7 +39,7 @@ let __collision_case ~stateless ( ) =
   check bool "cuid must be monotonically increasing" (first < last) true
 
 let __collision_slug_case ~stateless ( ) =
-  check bool "cuid must not collide" (does_slug_collide ~stateless ( )) true
+  check bool "cuid slug may collide" (does_slug_collide ~stateless ( )) true
 
 let suite = [
   "simple case",                `Quick, __simple_case;

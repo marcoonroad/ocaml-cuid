@@ -61,18 +61,13 @@ let timestamp ~now ( ) =
 
 let __extract_decimal float =
   let decimal = float -. Base.Float.round_down float in
-  let rec loop decimal =
-    if decimal = Base.Float.round_down decimal then decimal
-    else loop (decimal *. 10.)
-  in
-  Base.Float.to_int @@ loop decimal
+  Base.Float.to_int @@ Base.Float.round_down (decimal *. 1000000.)
 
 let counter ~stateless ~now ( ) =
   let value = if stateless then
     __extract_decimal now
   else (
-    state := !state mod maximum;
-    incr state;
+    state := 1 + (!state mod maximum);
     !state
   ) in
   value
