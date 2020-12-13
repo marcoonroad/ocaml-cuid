@@ -21,6 +21,6 @@ let does_collide_with iterations generator ( ) =
   loop 1;
   !collision
 
-let does_collide = does_collide_with 1700000 Cuid.generate
+let does_collide ~stateless = does_collide_with 1700000 @@ Cuid.generate ~stateless
 
-let does_slug_collide = does_collide_with 1700000 Cuid.slug
+let does_slug_collide ~stateless = does_collide_with 1700000 @@ Cuid.slug ~stateless

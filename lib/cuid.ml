@@ -53,16 +53,29 @@ let sum text =
   |> (Base.List.fold_left ~init:0 ~f:(+))
   in number / (String.length text + 1)
 
-let timestamp ( ) =
-  ( )
-  |> Unix.time
+let timestamp ~now ( ) =
+  now
+  |> Base.Float.round_down
   |> base36
   |> padding8
 
-let counter ( ) =
-  state := (if !state < maximum then !state else 0);
-  incr state;
-  !state
+let __extract_decimal float =
+  let decimal = float -. Base.Float.round_down float in
+  let rec loop decimal =
+    if decimal = Base.Float.round_down decimal then decimal
+    else loop (decimal *. 10.)
+  in
+  Base.Float.to_int @@ loop decimal
+
+let counter ~stateless ~now ( ) =
+  let value = if stateless then
+    __extract_decimal now
+  else (
+    state := !state mod maximum;
+    incr state;
+    !state
+  ) in
+  value
   |> pred
   |> float_of_int
   |> base36
@@ -106,15 +119,17 @@ let random ( ) =
   |> base36
   |> padding4
 
-let __fields ( ) =
-  (call timestamp),
-  (call counter),
+let __fields ~stateless ( ) =
+  let now = Unix.gettimeofday ( ) in
+  (timestamp ~now ( )),
+  (counter ~stateless ~now ( )),
   fingerprint,
   (call random ^ call random)
 
-let generate ( ) =
+let generate ?(stateless=false) ( ) =
+  let now = Unix.gettimeofday ( ) in
   prefix ^
-  (call timestamp) ^ (call counter) ^
+  (timestamp ~now ( )) ^ (counter ~stateless ~now ( )) ^
   fingerprint ^
   (call random) ^ (call random)
 
@@ -123,9 +138,10 @@ let fingerprint_slug =
   Base.String.sub ~pos:0 ~len:1 fingerprint ^
   Base.String.sub ~pos:(length - 1) ~len:1 fingerprint
 
-let slug ( ) =
-  let timestamp' = call timestamp in
-  let counter' = call counter in
+let slug ?(stateless=false) ( ) =
+  let now = Unix.gettimeofday ( ) in
+  let timestamp' = timestamp ~now ( ) in
+  let counter' = counter ~stateless ~now ( ) in
   let random' = call random in
   let timestamp'_length = Base.String.length timestamp' in
   let counter'_length = Base.String.length counter' in

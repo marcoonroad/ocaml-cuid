@@ -54,7 +54,9 @@ uninstall:
 
 .PHONY: coverage
 coverage: clean vendor
-	@ BISECT_ENABLE=YES dune runtest
+	@ BISECT_ENABLE=YES dune runtest --force
+	@ bisect-ppx-report -title ocaml-cuid -I _build/default/ -tab-size 2 \
+		-html coverage/ `find . -name 'bisect*.out'`
 	@ bisect-ppx-report -I _build/default/ -text - `find . -name 'bisect*.out'`
 
 .PHONY: report
