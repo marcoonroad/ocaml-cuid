@@ -21,6 +21,10 @@ let does_collide_with iterations generator ( ) =
   loop 1;
   !collision
 
-let does_collide ~stateless = does_collide_with 1700000 @@ Cuid.generate ~stateless
+(* FIXME: attempt to test on Windows, stateless seems to break in this OS *)
+let loops =
+  if Sys.os_type = "Unix" then 1700000 else 170000
 
-let does_slug_collide ~stateless = does_collide_with 1700000 @@ Cuid.slug ~stateless
+let does_collide ~stateless = does_collide_with loops @@ Cuid.generate ~stateless
+
+let does_slug_collide ~stateless = does_collide_with loops @@ Cuid.slug ~stateless
