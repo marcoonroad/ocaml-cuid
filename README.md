@@ -56,6 +56,28 @@ let slug = Cuid.slug ( )
 (* slug is "u90m0y0m", for example *)
 ```
 
+As command-line tool:
+
+```shell
+$ ocuidml
+c00qla2yy5k6x07o8cmzz581r
+$ ocuidml -slug
+z1dw0ydw
+$ ocuidml --slug # same as -slug
+0enj0mnj
+```
+
+**Important:** Please note that the CLI utility uses a non-standard /
+custom CUID stateless algorithm, which replaces the counter with
+the milliseconds part of the timestamp (only the seconds part is used
+on default / standard algorithm). This is just to make the CLI tool
+portable on most platforms (i.e, Linux, Windows and MacOS). Also, the
+fingerprint part of CUID will be different for every executable call
+cause it depends on both hashed hostname and process ID. To comply
+with this non-standard algorithm, both `Cuid.generate` and `Cuid.slug`
+functions support a `~stateless:boolean` parameter/flag, which defaults
+to `?(stateless=false)`.
+
 ### Conclusion
 
 PRs & issues are welcome. Have fun and imagine Sisyphus happy.

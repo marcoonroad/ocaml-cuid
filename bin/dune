@@ -1,0 +1,5 @@
+(executable
+  (name ocuidml)
+  (public_name ocuidml)
+  (package cuid)
+  (libraries base cuid))
