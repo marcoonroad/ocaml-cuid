@@ -80,9 +80,12 @@ let fingerprint =
 
 let __sum_then_mod ~basis blob =
   let length = Cstruct.len blob in
+  let __get_byte_num index =
+    Cstruct.get_uint8 blob index + 1
+  in
   let rec loop index sum =
     if index = length then sum else
-    loop (index + 1) (sum + Cstruct.get_uint8 blob index)
+    loop (index + 1) (sum + __get_byte_num index)
   in
   loop 0 0 mod basis
 
