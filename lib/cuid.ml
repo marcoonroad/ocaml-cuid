@@ -67,7 +67,8 @@ let counter ~stateless ~now ( ) =
   let value = if stateless then
     __extract_decimal now
   else (
-    state := 1 + (!state mod maximum);
+    state := !state mod maximum;
+    incr state;
     !state
   ) in
   value
@@ -122,7 +123,7 @@ let __fields ~stateless ( ) =
   (call random ^ call random)
 
 let generate ?(stateless=false) ( ) =
-  let now = Unix.gettimeofday ( ) in
+  let now = Unix.gettimeofday ( ) *. 1000. in
   prefix ^
   (timestamp ~now ( )) ^ (counter ~stateless ~now ( )) ^
   fingerprint ^
@@ -134,7 +135,7 @@ let fingerprint_slug =
   Base.String.sub ~pos:(length - 1) ~len:1 fingerprint
 
 let slug ?(stateless=false) ( ) =
-  let now = Unix.gettimeofday ( ) in
+  let now = Unix.gettimeofday ( ) *. 1000. in
   let timestamp' = timestamp ~now ( ) in
   let counter' = counter ~stateless ~now ( ) in
   let random' = call random in

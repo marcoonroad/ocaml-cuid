@@ -16,7 +16,7 @@ let does_collide_with iterations generator ( ) =
   in
   loop (generator ( )) 1
 
-let loops = 1700000
+let loops = 1500000
 
 let does_collide ~stateless = does_collide_with loops @@ Cuid.generate ~stateless
 

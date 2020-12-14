@@ -32,6 +32,8 @@ jobs:
       - run: opam depext ${{ matrix.package }} --yes --with-test
       - run: opam install . --deps-only --with-doc --with-test
       - run: opam exec -- dune build
+        env:
+          BISECT_ENABLE: "YES"
       - run: opam exec -- dune runtest --force
         env:
           ALCOTEST_QUICK_TESTS: "1"

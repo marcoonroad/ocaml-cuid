@@ -68,9 +68,8 @@ $ ocuidml --slug # same as -slug
 ```
 
 **Important:** Please note that the CLI utility uses a non-standard /
-custom CUID stateless algorithm, which replaces the counter with
-the milliseconds part of the timestamp (only the seconds part is used
-on default / standard algorithm). This is just to make the CLI tool
+custom CUID stateless algorithm, which replaces the counter with the
+remaining decimal part of the timestamp. This is just to make the CLI tool
 portable on most platforms (i.e, Linux, Windows and MacOS). Also, the
 fingerprint part of CUID will be different for every executable call
 cause it depends on both hashed hostname and process ID. To comply
