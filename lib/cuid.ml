@@ -54,7 +54,7 @@ let sum text =
   in number / (String.length text + 1)
 
 let timestamp ~now ( ) =
-  now
+  now *. 100.
   |> Base.Float.round_down
   |> base36
   |> padding8
@@ -116,14 +116,14 @@ let random ( ) =
   |> padding4
 
 let __fields ~stateless ( ) =
-  let now = Unix.gettimeofday ( ) in
+  let now = Unix.gettimeofday ( ) *. 10. in
   (timestamp ~now ( )),
   (counter ~stateless ~now ( )),
   fingerprint,
   (call random ^ call random)
 
 let generate ?(stateless=false) ( ) =
-  let now = Unix.gettimeofday ( ) *. 1000. in
+  let now = Unix.gettimeofday ( ) *. 10. in
   prefix ^
   (timestamp ~now ( )) ^ (counter ~stateless ~now ( )) ^
   fingerprint ^
@@ -135,7 +135,7 @@ let fingerprint_slug =
   Base.String.sub ~pos:(length - 1) ~len:1 fingerprint
 
 let slug ?(stateless=false) ( ) =
-  let now = Unix.gettimeofday ( ) *. 1000. in
+  let now = Unix.gettimeofday ( ) *. 10. in
   let timestamp' = timestamp ~now ( ) in
   let counter' = counter ~stateless ~now ( ) in
   let random' = call random in
