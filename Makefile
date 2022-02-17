@@ -24,7 +24,7 @@ build:
 	@ opam exec dune build
 
 test: clean build
-	@ dopam exec une runtest
+	@ opam exec dune runtest
 
 quick-test: clean build
 	@ ALCOTEST_QUICK_TESTS=1 opam exec dune runtest

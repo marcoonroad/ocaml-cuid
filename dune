@@ -1,7 +1,9 @@
-(alias
- (name runtest)
+(rule
+ (alias   runtest)
  (package cuid)
- (deps
-  (:< test/cuids.exe))
- (action
-  (run %{<})))
+ (deps    test/cuids.exe)
+ (action  (run %{exe:test/cuids.exe})))
+
+;(rule
+; (alias   runtest)
+; (action (run %{exe:my-test-program.exe} blah)))
