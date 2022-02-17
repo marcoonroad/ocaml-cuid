@@ -10,20 +10,24 @@ let alphabet = [
 
 let floor_to_int number =
   number
-  |> Base.Float.round_down
+  |> Float.floor
   |> int_of_float
+
+let string_to_char_list string =
+  let rec loop acc i = if i < 0 then acc else loop (string.[i] :: acc) (i - 1) in
+  loop [] (String.length string - 1)
 
 let rec loop result number =
   if number <= 0. then result else
-    let index   = Base.Float.mod_float number 36. in
-    let number' = Base.Float.(number / 36.) in
+    let index   = Float.rem number 36. in
+    let number' = number /. 36. in
     let digit   = List.nth alphabet (floor_to_int index) in
     let result' = digit ^ result in
     loop result' number'
 
 let base36 number =
-  let number' = Base.Float.abs number in
-  if Base.Float.(number' < 36.) then
+  let number' = Float.abs number in
+  if number' < 36. then
     List.nth alphabet (floor_to_int number')
   else
     loop "" number'
@@ -36,9 +40,9 @@ let adjust fill text =
 
 let padding fill count text =
   let adjusted = adjust fill text in
-  let length   = Base.String.length adjusted in
+  let length   = String.length adjusted in
   let offset   = length - count in
-  Base.String.sub adjusted ~pos:offset ~len:count
+  String.sub adjusted offset count
 
 let padding4 = padding 8 4
 let padding8 = padding 8 8
@@ -48,9 +52,9 @@ let digest text   = Digest.to_hex (Digest.string text)
 
 let sum text =
   let number = text
-  |> Base.String.to_list
-  |> (Base.List.map ~f:int_of_char)
-  |> (Base.List.fold_left ~init:0 ~f:(+))
+  |> string_to_char_list
+  |> List.map int_of_char
+  |> List.fold_left (+) 0
   in number / (String.length text + 1)
 
 let timestamp ( ) =
@@ -116,21 +120,21 @@ let generate ( ) =
   (call random) ^ (call random)
 
 let fingerprint_slug =
-  let length = Base.String.length fingerprint in
-  Base.String.sub ~pos:0 ~len:1 fingerprint ^
-  Base.String.sub ~pos:(length - 1) ~len:1 fingerprint
+  let length = String.length fingerprint in
+  String.sub fingerprint 0 1 ^
+  String.sub fingerprint (length - 1) 1
 
 let slug ( ) =
   let timestamp' = call timestamp in
   let counter' = call counter in
   let random' = call random in
-  let timestamp'_length = Base.String.length timestamp' in
-  let counter'_length = Base.String.length counter' in
-  let random'_length = Base.String.length random' in
-  Base.String.sub ~pos:(timestamp'_length - 2) ~len:2 timestamp' ^
-  Base.String.sub ~pos:(counter'_length - 2) ~len:2 counter' ^
+  let timestamp'_length = String.length timestamp' in
+  let counter'_length = String.length counter' in
+  let random'_length = String.length random' in
+  String.sub timestamp' (timestamp'_length - 2) 2 ^
+  String.sub counter' (counter'_length - 2) 2 ^
   fingerprint_slug ^
-  Base.String.sub ~pos:(random'_length - 2) ~len:2 counter'
+  String.sub counter' (random'_length - 2) 2
 
 let _ =
   Mirage_crypto_rng_unix.initialize ( )
