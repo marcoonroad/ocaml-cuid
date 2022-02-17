@@ -4,6 +4,4 @@
  (synopsis "CUID generator for OCaml.")
  (wrapped false)
  (instrumentation (backend bisect_ppx))
- (libraries 
-;base
- unix mirage-crypto mirage-crypto-rng  mirage-crypto-rng.unix))
+ (libraries unix mirage-crypto mirage-crypto-rng mirage-crypto-rng.unix))
