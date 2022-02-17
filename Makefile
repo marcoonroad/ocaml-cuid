@@ -18,19 +18,19 @@ vendor:
 
 .PHONY: utop
 utop:
-	@ dune utop lib
+	@ opam exec dune utop lib
 
 build:
-	@ dune build
+	@ opam exec dune build
 
 test: clean build
-	@ dune runtest
+	@ dopam exec une runtest
 
 quick-test: clean build
-	@ ALCOTEST_QUICK_TESTS=1 dune runtest
+	@ ALCOTEST_QUICK_TESTS=1 opam exec dune runtest
 
 doc: build
-	@ dune build @doc
+	@ opam exec dune build @doc
 
 .PHONY: cleanup
 cleanup:
@@ -44,21 +44,21 @@ cleanup:
 
 .PHONY: clean
 clean: cleanup
-	@ dune clean
+	@ opam exec dune clean
 
 install: build
-	@ dune install
+	@ opam exec dune install
 
 uninstall:
-	@ dune uninstall
+	@ opam exec dune uninstall
 
 .PHONY: coverage
 coverage: clean vendor
-	@ BISECT_ENABLE=YES dune runtest
-	@ bisect-ppx-report -I _build/default/ -text - `find . -name 'bisect*.out'`
+	@ BISECT_ENABLE=YES opam exec dune runtest
+	@ opam exec bisect-ppx-report -I _build/default/ -text - `find . -name 'bisect*.out'`
 
 .PHONY: report
 report: coverage
-	@ bisect-ppx-report send-to Coveralls
+	@ opam exec bisect-ppx-report send-to Coveralls
 
 # END
