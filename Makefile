@@ -16,6 +16,10 @@ unpin:
 vendor:
 	@ opam install . --deps-only --yes
 
+.PHONY: vendor-test
+vendor-test:
+	@ opam install . --deps-only --with-test --yes
+
 .PHONY: utop
 utop:
 	@ opam exec dune utop lib
