@@ -28,10 +28,10 @@ build:
 	@ opam exec dune build
 
 test: clean build
-	@ opam exec dune runtest
+	@ opam exec dune build @runtest
 
 quick-test: clean build
-	@ ALCOTEST_QUICK_TESTS=1 opam exec dune runtest
+	@ ALCOTEST_QUICK_TESTS=1 opam exec dune buidl @runtest
 
 doc: build
 	@ opam exec dune build @doc

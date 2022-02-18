@@ -1,7 +1,6 @@
 (library
- (name cuid)
  (public_name cuid)
  (synopsis "CUID generator for OCaml.")
  (wrapped false)
- (instrumentation (backend bisect_ppx))
- (libraries unix))
+ (libraries unix)
+ (instrumentation (backend bisect_ppx)))
