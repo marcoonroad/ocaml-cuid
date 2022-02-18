@@ -1,2 +1,2 @@
-module Jv : Cuid.S
+include Cuid.S
 

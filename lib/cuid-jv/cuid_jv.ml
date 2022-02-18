@@ -1,4 +1,4 @@
-module Jv = Cuid.Make (struct
+include Cuid.Make (struct
   open Brr
 
   let mime_types_length = match Jv.find (Jv.Id.to_jv G.navigator) "mimeTypes" with
