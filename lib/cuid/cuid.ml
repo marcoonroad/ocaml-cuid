@@ -13,15 +13,11 @@ let base36 number =
   let rec loop result number =
     if number <= 0. then result else
       let index   = Float.rem number 36. in
-      let number' = number /. 36. in
+      let number' = Float.trunc (number /. 36.) in
       let digit   = List.nth alphabet (floor_to_int index) in
       let result' = digit ^ result in
       loop result' number' in
-  let number' = Float.abs number in
-  if number' < 36. then
-    List.nth alphabet (floor_to_int number')
-  else
-    loop "" number'
+    loop "" (Float.abs number)
 
 let adjust fill text =
   let length = String.length text in

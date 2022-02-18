@@ -1,6 +1,6 @@
 opam-version: "2.0"
 name:         "cuid-unix"
-version:      "2.0.2"
+version:      "2.0.3"
 maintainer:   "Martin Schut <m.schut@wommm.nl>"
 authors:      [ "Marco Aurélio da Silva <marcoonroad@gmail.com>" "Martin Schut <m.schut@wommm.nl>" ]
 bug-reports:  "https://gitlab.com/schutm/ocaml-cuid/issues"
