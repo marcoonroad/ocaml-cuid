@@ -18,6 +18,7 @@ run-test: [ "dune" "runtest" "-p" name "-j" jobs ]
 
 depends: [
     "ocaml" {>= "4.12.1"}
+    "brr" {>= "0.0.3"}
     "dune" {build & >= "2.9.3"}
     "bisect_ppx" {with-test & >= "2.8.0"}
 ]
