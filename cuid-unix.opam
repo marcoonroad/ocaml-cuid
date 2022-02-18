@@ -18,6 +18,7 @@ run-test: [ "dune" "runtest" "-p" name "-j" jobs ]
 
 depends: [
     "ocaml" {>= "4.12.1"}
+    "cuid" {>= "1.1"}
     "dune" {build & >= "2.9.3"}
     "re" {with-test & >= "1.10.3"}
     "alcotest" {with-test & >= "1.5.0"}
