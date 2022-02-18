@@ -1,6 +1,6 @@
 opam-version: "2.0"
 name:         "cuid-unix"
-version:      "1.1"
+version:      "2.0.0"
 maintainer:   "Martin Schut <m.schut@wommm.nl>"
 authors:      [ "Marco Aurélio da Silva <marcoonroad@gmail.com>" "Martin Schut <m.schut@wommm.nl>" ]
 bug-reports:  "https://gitlab.com/schutm/ocaml-cuid/issues"
@@ -18,7 +18,7 @@ run-test: [ "dune" "runtest" "-p" name "-j" jobs ]
 
 depends: [
     "ocaml" {>= "4.12.1"}
-    "cuid" {>= "1.1"}
+    "cuid" {>= "2.0.0"}
     "dune" {build & >= "2.9.3"}
     "re" {with-test & >= "1.10.3"}
     "alcotest" {with-test & >= "1.5.0"}
