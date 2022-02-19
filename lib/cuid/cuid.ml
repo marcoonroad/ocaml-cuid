@@ -4,20 +4,15 @@ let alphabet = [
   "n"; "o"; "p"; "q"; "r"; "s"; "t"; "u"; "v"; "w"; "x"; "y"; "z"
 ]
 
-let floor_to_int number =
-  number
-  |> Float.floor
-  |> int_of_float
-
 let base36 number =
   let rec loop result number =
-    if number <= 0. then result else
-      let index   = Float.rem number 36. in
-      let number' = Float.trunc (number /. 36.) in
-      let digit   = List.nth alphabet (floor_to_int index) in
+    if number <= 0 then result else
+      let index   = number mod 36 in
+      let number' = number / 36 in
+      let digit   = List.nth alphabet index in
       let result' = digit ^ result in
       loop result' number' in
-    loop "" (Float.abs number)
+    loop "" (Int.abs number)
 
 let adjust fill text =
   let length = String.length text in
@@ -53,6 +48,7 @@ end) = struct
     ( )
     |> Unix.gettimeofday
     |> ( *. ) 1000.
+    |> int_of_float
     |> base36
     |> padding8
 
@@ -61,14 +57,12 @@ end) = struct
     incr state;
     !state
     |> pred
-    |> float_of_int
     |> base36
     |> padding4
 
   let random ( ) =
     maximum
     |> Random.int
-    |> float_of_int
     |> base36
     |> padding4
 

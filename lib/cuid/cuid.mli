@@ -4,7 +4,7 @@ module type S = sig
   val slug : unit -> string
 end
 
-val base36 : float -> string
+val base36 : int -> string
 
 val padding4 : string -> string
 

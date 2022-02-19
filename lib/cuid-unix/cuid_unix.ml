@@ -18,7 +18,6 @@ include Cuid.Make (struct
     |> digest
     |> sum
     in (number + Unix.getpid ( ))
-    |> float_of_int
     |> Cuid.base36
     |> Cuid.padding4
 end)
