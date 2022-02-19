@@ -12,22 +12,16 @@ let base36 number =
       let digit   = List.nth alphabet index in
       let result' = digit ^ result in
       loop result' number' in
-    loop "" (Int.abs number)
+    loop "" (abs number)
 
-let adjust fill text =
-  let length = String.length text in
-  let size   = max 0 (fill - length) in
-  let buffer = String.make size '0' in
-    buffer ^ text
+let padding size text =
+  let pad = String.make size '0' in
+  let padded_text = pad ^ text in
+  let padded_text_length = String.length padded_text in
+  String.sub padded_text (padded_text_length - size) size
 
-let padding fill count text =
-  let adjusted = adjust fill text in
-  let length   = String.length adjusted in
-  let offset   = length - count in
-  String.sub adjusted offset count
-
-let padding4 = padding 8 4
-let padding8 = padding 8 8
+let padding4 = padding 4
+let padding8 = padding 8
 
 module type S = sig
   val __fields : unit -> string * string * string * string
