@@ -40,7 +40,9 @@ module type S = sig
   val slug : unit -> string
 end
 
-module Make (Fingerprint : sig val value : string end) = struct
+module Make (Fingerprint : sig
+  val value : string
+end) = struct
   let maximum = int_of_float (36.0 ** 4.0)
   let prefix  = "c"
   let state   = ref 0
@@ -49,7 +51,8 @@ module Make (Fingerprint : sig val value : string end) = struct
 
   let timestamp ( ) =
     ( )
-    |> Unix.time
+    |> Unix.gettimeofday
+    |> ( *. ) 1000.
     |> base36
     |> padding8
 
