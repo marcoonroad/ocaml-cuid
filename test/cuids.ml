@@ -44,6 +44,8 @@ let suite = [
   "slug collision", `Slow,  __collision_slug_case
 ]
 
-let ( ) = run "CUID Tests" [
+let ( ) = 
+ (* Printf.printf "% %s %s" (Cuid_unix.generate ()) (Cuid_unix.generate ()) *)
+ run "CUID Tests" [
   "test suite", suite;
 ]

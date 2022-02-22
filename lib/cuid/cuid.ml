@@ -39,12 +39,24 @@ end) = struct
   let call   lambda = lambda ( )
 
   let timestamp ( ) =
-    ( )
-    |> Unix.gettimeofday
-    |> ( *. ) 1000.
-    |> int_of_float
-    |> base36
-    |> padding8
+    let t = Unix.gettimeofday () in
+    let timeofday =
+      t
+      |> ( *. ) 1000.
+      |> Int64.of_float in
+    let low = Int64.(rem timeofday (of_int maximum)) in
+    let high = Int64.(div timeofday (of_int maximum)) in
+    let low_base36 =
+      low
+      |> Int64.to_int
+      |> base36
+      |> padding4 in
+    let high_base36 =
+      high
+      |> Int64.to_int
+      |> base36
+      |> padding4 in
+    high_base36 ^ low_base36
 
   let counter ( ) =
     state := (if !state < maximum then !state else 0);
