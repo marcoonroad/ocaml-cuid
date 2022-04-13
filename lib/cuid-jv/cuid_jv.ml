@@ -28,7 +28,13 @@ include Cuid.Make
 
     let generate n =
       match crypto with 
-        | Some crypto -> Array.init n (fun _i -> Jv.apply crypto Tarray.[| to_jv (create Uint8 1) |] |> Jv.to_int |> Char.chr)
-        | None -> Array.init n (fun _i -> (Jv.to_float (Jv.apply random [| |])) *. 256.0 |> Int.of_float |> Char.chr)
+        | Some crypto -> Array.init n (fun _i ->
+              Jv.call crypto "getRandomValues" Tarray.[| to_jv (create Uint8 1) |]
+              |> Jv.to_int
+              |> Char.chr)
+        | None -> Array.init n (fun _i ->
+              (Jv.to_float (Jv.apply random [| |])) *. 256.0
+              |> Int.of_float
+              |> Char.chr)
   end)
 
