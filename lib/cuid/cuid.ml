@@ -21,7 +21,6 @@ let padding size text =
   String.sub padded_text (padded_text_length - size) size
 
 let padding4 = padding 4
-let padding8 = padding 8
 
 module type S = sig
   val __fields : unit -> string * string * string * string
@@ -29,19 +28,19 @@ module type S = sig
   val slug : unit -> string
 end
 
-module Make (Fingerprint : sig
-  val value : string
-end) = struct
+module Make
+  (Fingerprint : sig val value : string end)
+  (Rng : sig val generate : int -> char array end) = struct
   let maximum = int_of_float (36.0 ** 4.0)
   let prefix  = "c"
   let state   = ref 0
 
-  let call   lambda = lambda ( )
+  let call lambda = lambda ( )
 
   let timestamp ( ) =
-    let t = Unix.gettimeofday () in
     let timeofday =
-      t
+      ( )
+      |> Unix.gettimeofday
       |> ( *. ) 1000.
       |> Int64.of_float in
     let low = Int64.(rem timeofday (of_int maximum)) in
@@ -66,9 +65,31 @@ end) = struct
     |> base36
     |> padding4
 
+  let rec greatest_common_divisor = function
+    | (m, 0) -> m
+    | (m, n) -> greatest_common_divisor (n, m mod n)
+
+  let least_common_multiple (m, n) =
+    (m * n) / greatest_common_divisor (m,  n)
+
+  let reduce_values base values_per_number values =
+    let rec aux i acc =
+      if i < 0 then acc else
+        Array.sub values i values_per_number
+        |> Array.fold_left (fun acc value -> (Char.code value) + acc) 0
+        |> ( Fun.flip ( mod ) ) base
+        |> ( ( * ) Int.( of_float ((to_float 36) ** (to_float i))) )
+        |> ( ( + ) acc )
+        |> aux ( i - values_per_number )
+    in
+    aux ((Array.length values) - values_per_number) 0
+
   let random ( ) =
-    maximum
-    |> Random.int
+    let lcm = least_common_multiple (256, 36) in
+    let values_per_number = lcm / 256 in
+    values_per_number
+    |> Rng.generate
+    |> reduce_values 36 values_per_number
     |> base36
     |> padding4
 
@@ -100,7 +121,4 @@ end) = struct
     String.sub counter' (counter'_length - 2) 2 ^
     fingerprint_slug ^
     String.sub counter' (random'_length - 2) 2
-
-  let _ =
-    Random.self_init ( )
 end

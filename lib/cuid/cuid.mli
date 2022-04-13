@@ -8,7 +8,6 @@ val base36 : int -> string
 
 val padding4 : string -> string
 
-val padding8 : string -> string
-
-module Make (Fingerprint : sig val value : string end) : S
-
+module Make
+  (Fingerprint : sig val value : string end)
+  (Rng: sig val generate : int -> char array end) : S
