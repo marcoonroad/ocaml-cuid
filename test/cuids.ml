@@ -45,7 +45,6 @@ let suite = [
 ]
 
 let ( ) = 
- (* Printf.printf "% %s %s" (Cuid_unix.generate ()) (Cuid_unix.generate ()) *)
  run "CUID Tests" [
   "test suite", suite;
 ]

@@ -72,22 +72,25 @@ module Make
   let least_common_multiple (m, n) =
     (m * n) / greatest_common_divisor (m,  n)
 
+  let pow b n =
+    Int.(of_float ((to_float b) ** (to_float n)))
+
   let reduce_values base values_per_number values =
     let rec aux i acc =
       if i < 0 then acc else
-        Array.sub values i values_per_number
-        |> Array.fold_left (fun acc value -> (Char.code value) + acc) 0
-        |> ( Fun.flip ( mod ) ) base
-        |> ( ( * ) Int.( of_float ((to_float 36) ** (to_float i))) )
-        |> ( ( + ) acc )
-        |> aux ( i - values_per_number )
+        Array.sub values (i * values_per_number) values_per_number
+        |> Array.fold_left ( fun acc value -> ( Char.code value ) + acc ) 0
+        |> Fun.( flip ( mod ) ) base
+        |> Int.( mul ( pow 36 i ) )
+        |> Int.( add acc )
+        |> aux ( i - 1 )
     in
-    aux ((Array.length values) - values_per_number) 0
+    aux ((Array.length values) / values_per_number - 1) 0
 
   let random ( ) =
     let lcm = least_common_multiple (256, 36) in
     let values_per_number = lcm / 256 in
-    values_per_number
+    4 * values_per_number
     |> Rng.generate
     |> reduce_values 36 values_per_number
     |> base36
