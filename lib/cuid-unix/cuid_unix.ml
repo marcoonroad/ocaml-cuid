@@ -23,7 +23,7 @@ include Cuid.Make
       |> Cuid.padding4
   end)
   (struct
-    let ( ) = Printf.printf "OUT"; Mirage_crypto_rng_unix.initialize ( )
+    let ( ) = Mirage_crypto_rng_unix.initialize ( )
 
     let generate n =
       let block = Mirage_crypto_rng.generate n in
