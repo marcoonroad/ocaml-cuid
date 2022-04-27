@@ -1,7 +1,0 @@
-(alias
- (name runtest)
- (package cuid)
- (deps
-  (:< test/cuids.exe))
- (action
-  (run %{<})))

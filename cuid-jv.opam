@@ -1,5 +1,5 @@
 opam-version: "2.0"
-name:         "cuid"
+name:         "cuid-jv"
 version:      "0.3"
 maintainer:   "Martin Schut <m.schut@wommm.nl>"
 authors:      [ "Marco Aurélio da Silva <marcoonroad@gmail.com>" "Martin Schut <m.schut@wommm.nl>" ]
@@ -7,7 +7,7 @@ bug-reports:  "https://gitlab.com/schutm/ocaml-cuid/issues"
 license:      "MIT"
 homepage:     "https://gitlab.com/schutm/ocaml-cuid"
 dev-repo:     "git://gitlab.com/schutm/ocaml-cuid.git"
-synopsis:     "CUID generator for OCaml"
+synopsis:     "Jv based CUID generator for OCaml for usage with js_of_ocaml"
 
 build: [
     [ "dune" "subst" ] {pinned}
@@ -18,6 +18,8 @@ run-test: [ "dune" "runtest" "-p" name "-j" jobs ]
 
 depends: [
     "ocaml" {>= "4.06.1"}
+    "brr" {>= "0.0.2"}
+    "cuid" {>= "0.3"}
     "dune" {build & >= "2.9.3"}
     "bisect_ppx" {with-test & >= "2.8.0"}
 ]
