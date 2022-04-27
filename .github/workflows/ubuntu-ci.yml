@@ -39,6 +39,8 @@ jobs:
         with:
           ocaml-version: ${{ matrix.ocaml-version }}
 
+      - run: opam pin add cuid-core.dev . --no-action
+      - run: opam pin add cuid-unix.dev . --no-action
       - run: opam pin add ${{ matrix.package }}.dev . --no-action
       - run: opam depext ${{ matrix.package }} --yes --with-test
       - run: opam install . --deps-only --with-doc --with-test
