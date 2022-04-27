@@ -17,7 +17,7 @@ build: [
 run-test: [ "dune" "runtest" "-p" name "-j" jobs ]
 
 depends: [
-    "ocaml" {>= "4.6.1"}
+    "ocaml" {>= "4.08.0"}
     "cuid" {>= "0.3"}
     "mirage-crypto" {>= "0.6.1"}
     "mirage-crypto-rng" {>= "0.6.1"}
