@@ -34,7 +34,7 @@ Otherwise, this library is also installable using
 Dune within this root directory:
 
 ```shell
-$ dune install
+$ dune install cuid
 ```
 
 ### Usage

@@ -1,11 +1,11 @@
 opam-version: "2.0"
-name:         "cuid-unix"
+name:         "cuid-core"
 version:      "0.3"
 bug-reports:  "https://github.com/marcoonroad/ocaml-cuid/issues"
 license:      "MIT"
 homepage:     "https://github.com/marcoonroad/ocaml-cuid"
 dev-repo:     "git://github.com/marcoonroad/ocaml-cuid.git"
-synopsis:     "Unix based CUID generator for OCaml"
+synopsis:     "CUID generator for OCaml"
 
 maintainer: [
     "Marco Aurélio da Silva <marcoonroad@gmail.com>"
@@ -25,11 +25,6 @@ run-test: [ "dune" "runtest" "-p" name "-j" jobs ]
 
 depends: [
     "ocaml" {>= "4.08.0"}
-    "cuid-core" {>= "0.3"}
-    "mirage-crypto" {>= "0.6.1"}
-    "mirage-crypto-rng" {>= "0.6.1"}
     "dune" {build & >= "2.9.3"}
-    "re" {with-test & >= "1.10.3"}
-    "alcotest" {with-test & >= "1.5.0"}
     "bisect_ppx" {with-test & >= "2.8.0"}
 ]

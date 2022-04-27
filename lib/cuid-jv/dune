@@ -3,4 +3,4 @@
  (public_name cuid-jv)
  (wrapped false)
  (instrumentation (backend bisect_ppx))
- (libraries cuid brr))
+ (libraries cuid-core brr))

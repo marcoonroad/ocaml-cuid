@@ -1,4 +1,4 @@
-include Cuid.Make
+include Cuid_core.Make
   (struct
     let digest text   = Digest.to_hex (Digest.string text)
 
@@ -19,8 +19,8 @@ include Cuid.Make
       |> digest
       |> sum
       in (number + Unix.getpid ( ))
-      |> Cuid.base36
-      |> Cuid.padding4
+      |> Cuid_core.base36
+      |> Cuid_core.padding4
   end)
   (struct
     let ( ) = Mirage_crypto_rng_unix.initialize ( )
