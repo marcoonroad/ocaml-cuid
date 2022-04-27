@@ -61,8 +61,9 @@ uninstall:
 .PHONY: coverage
 coverage: clean vendor
 	@ dune runtest --instrument-with bisect_ppx --force
+	@ bisect-ppx-report html --title ocaml-cuid --tab-size 2 -o coverage --verbose
 	@ opam exec bisect-ppx-report summary --verbose
-	
+
 
 .PHONY: report
 report: coverage

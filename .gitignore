@@ -2,5 +2,7 @@ _build/
 .merlin
 *.install
 jbuild-workspace
+dune-workspace
 _coverage/
 bisect*.out
+coverage/

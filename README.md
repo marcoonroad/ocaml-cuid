@@ -47,7 +47,7 @@ let cuid = Cuid.generate ( )
 ```
 
 There's also an implementation of CUID slugs. They fit in cases
-where collision resistance is not important and when they are not
+where _collision-resistance is not important_ and when they are not
 generated too frequently. For instance, we can use them as URL
 suffixes for blog posts. To generate a CUID slug, just use:
 

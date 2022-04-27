@@ -1,0 +1,65 @@
+name: Coverage Report Workflow
+
+on: ["push", "pull_request"]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - cuid
+        os:
+          - ubuntu-latest
+          - macos-latest
+        ocaml-version:
+          - 4.08.0
+          - 4.08.1
+          - 4.09.1
+          - 4.10.1
+          - 4.11.0
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Use OCaml ${{ matrix.ocaml-version }} on ${{ matrix.os }}
+        uses: avsm/setup-ocaml@v1
+        with:
+          ocaml-version: ${{ matrix.ocaml-version }}
+      - run: opam pin add cuid-core.dev . --no-action
+      - run: opam pin add cuid-unix.dev . --no-action
+      - run: opam pin add ${{ matrix.package }}.dev . --no-action
+      - run: opam depext ${{ matrix.package }} --yes --with-test
+      - run: opam install . --deps-only --with-doc --with-test
+#     - run: opam exec -- dune build
+#       env:
+#         BISECT_ENABLE: "YES"
+#     - run: opam exec -- dune runtest --force
+#       env:
+#         ALCOTEST_QUICK_TESTS: "1"
+#         BISECT_ENABLE: "YES"
+      - run: opam exec -- dune runtest --instrument-with bisect_ppx --force
+#     - run: |
+#         bisect-ppx-report coveralls coverage.json \
+#           --service-name github --parallel --git \
+#           --service-job-id $GITHUB_RUN_NUMBER \
+#           --service-pull-request ${{ github.event.number }}
+      - run: opam exec -- bisect-ppx-report send-to Coveralls --git
+      env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUEST_NUMBER: ${{ github.event.number }}
+#     - name: Coveralls Parallel on ${{ matrix.os }}, OCaml ${{ matrix.ocaml-version }}
+#       uses: coverallsapp/github-action@master
+#       with:
+#         github-token: ${{ secrets.github_token }}
+#         flag-name: ocaml-${{ matrix.ocaml-version }}-on-${{ matrix.os }}
+#         parallel: true
+# finish:
+#   needs: build
+#   runs-on: ubuntu-latest
+#   steps:
+#   - name: Coveralls Finished
+#     uses: coverallsapp/github-action@master
+#     with:
+#       github-token: ${{ secrets.GITHUB_TOKEN }}
+#       parallel-finished: true
