@@ -37,6 +37,9 @@ Dune within this root directory:
 $ dune install cuid
 ```
 
+This `cuid` package is just an alias/wrapper around the `cuid-unix` package, there are as well a JavaScript-target
+package called `cuid-jv`.
+
 ### Usage
 
 As library:
@@ -55,6 +58,9 @@ suffixes for blog posts. To generate a CUID slug, just use:
 let slug = Cuid.slug ( )
 (* slug is "u90m0y0m", for example *)
 ```
+
+For the `cuid-unix` internal package, the main module is called `Cuid_unix`, while the `cuid-jv` exposes the main
+module `Cuid_jv`.
 
 ### Conclusion
 

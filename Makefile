@@ -14,11 +14,11 @@ unpin:
 
 .PHONY: vendor
 vendor:
-	@ opam install . --deps-only --yes
+	@ opam install . --deps-only --yes --working-dir
 
 .PHONY: vendor-test
 vendor-test:
-	@ opam install . --deps-only --with-test --yes
+	@ opam install . --deps-only --with-test --yes --working-dir
 
 .PHONY: utop
 utop:
