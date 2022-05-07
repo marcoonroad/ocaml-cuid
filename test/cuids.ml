@@ -44,7 +44,7 @@ let suite = [
   "slug collision", `Slow,  __collision_slug_case
 ]
 
-let ( ) = 
+let ( ) =
  run "CUID Tests" [
   "test suite", suite;
 ]

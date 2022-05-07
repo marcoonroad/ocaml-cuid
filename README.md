@@ -34,8 +34,11 @@ Otherwise, this library is also installable using
 Dune within this root directory:
 
 ```shell
-$ dune install
+$ dune install cuid
 ```
+
+This `cuid` package is just an alias/wrapper around the `cuid-unix` package, there is a JavaScript-target
+package called `cuid-jv` as well.
 
 ### Usage
 
@@ -47,7 +50,7 @@ let cuid = Cuid.generate ( )
 ```
 
 There's also an implementation of CUID slugs. They fit in cases
-where collision resistance is not important and when they are not
+where _collision-resistance is not important_ and when they are not
 generated too frequently. For instance, we can use them as URL
 suffixes for blog posts. To generate a CUID slug, just use:
 
@@ -55,6 +58,9 @@ suffixes for blog posts. To generate a CUID slug, just use:
 let slug = Cuid.slug ( )
 (* slug is "u90m0y0m", for example *)
 ```
+
+For the `cuid-unix` internal package, the main module is called `Cuid_unix`, while the `cuid-jv` exposes the main
+module `Cuid_jv`.
 
 ### Conclusion
 

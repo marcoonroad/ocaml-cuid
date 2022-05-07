@@ -3,4 +3,4 @@
  (public_name cuid-unix)
  (wrapped false)
  (instrumentation (backend bisect_ppx))
- (libraries cuid unix mirage-crypto mirage-crypto-rng mirage-crypto-rng.unix))
+ (libraries cuid-core unix mirage-crypto mirage-crypto-rng mirage-crypto-rng.unix))

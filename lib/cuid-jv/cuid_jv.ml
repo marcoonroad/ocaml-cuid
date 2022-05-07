@@ -1,4 +1,4 @@
-include Cuid.Make
+include Cuid_core.Make
   (struct
     open Brr
 
@@ -16,9 +16,9 @@ include Cuid.Make
       Jv.Jarray.length a
 
     let value =
-      let id1 = Cuid.base36 (mime_types_length + user_agent_length) in
-      let id2 = Cuid.base36 variables_in_global_scope in
-      Cuid.padding4 id1 ^ id2
+      let id1 = Cuid_core.base36 (mime_types_length + user_agent_length) in
+      let id2 = Cuid_core.base36 variables_in_global_scope in
+      Cuid_core.padding4 id1 ^ id2
   end)
   (struct
     open Brr
