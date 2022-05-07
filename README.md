@@ -37,8 +37,8 @@ Dune within this root directory:
 $ dune install cuid
 ```
 
-This `cuid` package is just an alias/wrapper around the `cuid-unix` package, there are as well a JavaScript-target
-package called `cuid-jv`.
+This `cuid` package is just an alias/wrapper around the `cuid-unix` package, there is a JavaScript-target
+package called `cuid-jv` as well.
 
 ### Usage
 
